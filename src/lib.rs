@@ -1,6 +1,6 @@
-use std::io::Error;
-use std::fs;
 use crossterm::event::{poll, read, Event, KeyCode};
+use std::fs;
+use std::io::Error;
 use std::time::Duration;
 
 //Opens a file into a String when possible, otherwise it returns an error.
@@ -16,7 +16,9 @@ pub fn display_contents(contents: &String, scroll_lines_from: u8, scroll_lines_t
     for i in contents.split("\n") {
         content_vec.push(i.into());
     }
-    if (content_vec.len() > (scroll_lines_to - scroll_lines_from) as usize) && (content_vec.len() >= scroll_lines_to as usize) {
+    if (content_vec.len() > (scroll_lines_to - scroll_lines_from) as usize)
+        && (content_vec.len() >= scroll_lines_to as usize)
+    {
         let mut page: String = String::new();
 
         for i in (scroll_lines_from - 1)..scroll_lines_to {
@@ -49,9 +51,10 @@ pub fn get_user_input() -> Result<String, Error> {
                     KeyCode::Char('q') => return Ok(String::from("q")),
                     KeyCode::Char('i') => return Ok(String::from("i")),
                     KeyCode::Char('s') => return Ok(String::from("s")),
-                    _ => continue
+                    KeyCode::Char('d') => return Ok(String::from("d")),
+                    _ => continue,
                 }
             }
         }
-    } 
+    }
 }
