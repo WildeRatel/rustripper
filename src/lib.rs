@@ -1,5 +1,6 @@
 use crossterm::event::{poll, read, Event, KeyCode};
 use std::fs;
+use std::io;
 use std::io::Error;
 use std::time::Duration;
 
@@ -55,6 +56,52 @@ pub fn get_user_input() -> Result<String, Error> {
                     _ => continue,
                 }
             }
+        }
+    }
+}
+
+//Dummy wait for any input function.
+pub fn dummy_wait() {
+    let mut dummy: String = String::new();
+    std::io::stdin()
+        .read_line(&mut dummy)
+        .expect("Error reading line!");
+}
+
+//Display function.
+pub fn display(contents: &String) {
+    println!("d");
+
+    let mut line_from: String = String::new();
+    let mut line_to: String = String::new();
+    io::stdin()
+        .read_line(&mut line_from)
+        .expect("Failed to read line!");
+    io::stdin()
+        .read_line(&mut line_to)
+        .expect("Failed to read line!");
+
+    if let Err(parse_e) = line_from.trim().parse::<u8>() {
+        println!("Failed to parse input: {parse_e}");
+        dummy_wait();
+    } else {
+        if let Err(parse_e) = line_to.trim().parse::<u8>() {
+            println!("Failed to parse input: {parse_e}");
+            dummy_wait();
+        } else {
+            let page: String = display_contents(
+                &contents,
+                line_from.trim().parse::<u8>().unwrap(),
+                line_to.trim().parse::<u8>().unwrap(),
+            );
+
+            //I'm still using Nah as an error code, should probably go and fix that later. Maybe, maybe not, i dunno.
+            if page != String::from("Nah") {
+                println!("{page}");
+            } else {
+                eprintln!("Nah");
+            }
+            dummy_wait();
         }
     }
 }

@@ -13,53 +13,29 @@ fn main() {
     }
     // Most of the code will be going in here.
     else {
-        println!("Controls: (q)uit | (i)nfo | (s)earch | (d)isplay lines");
-        let contents: String = ripper::open_file(&user).unwrap();
+        loop {
+            let _ = std::process::Command::new("cmd")
+                .args(&["/C", "cls"])
+                .status()
+                .expect("Failed to clear screen!");
+            println!("Controls: (q)uit | (i)nfo | (s)earch | (d)isplay lines");
+            let contents: String = ripper::open_file(&user).unwrap();
 
-        //User input
-        if let Err(key_error) = ripper::get_user_input() {
-            eprintln!("Error: {key_error}");
-        } else {
-            let key_pressed = ripper::get_user_input().unwrap();
+            //User input
+            if let Err(key_error) = ripper::get_user_input() {
+                eprintln!("Error: {key_error}");
+            } else {
+                let key_pressed = ripper::get_user_input().unwrap();
 
-            if key_pressed == String::from("d") {
-                println!("d");
-
-                let mut line_from: String = String::new();
-                let mut line_to: String = String::new();
-                io::stdin()
-                    .read_line(&mut line_from)
-                    .expect("Failed to read line!");
-                io::stdin()
-                    .read_line(&mut line_to)
-                    .expect("Failed to read line!");
-
-                if let Err(parse_e) = line_from.trim().parse::<u8>() {
-                    println!("Failed to parse input: {parse_e}");
-                } else {
-                    if let Err(parse_e) = line_to.trim().parse::<u8>() {
-                        println!("Failed to parse input: {parse_e}");
-                    } else {
-                        let page: String = ripper::display_contents(
-                            &contents,
-                            line_from.trim().parse::<u8>().unwrap(),
-                            line_to.trim().parse::<u8>().unwrap(),
-                        );
-
-                        //I'm still using Nah as an error code, should probably go and fix that later. Maybe, maybe not, i dunno.
-                        if page != String::from("Nah") {
-                            println!("{page}");
-                        } else {
-                            eprintln!("Nah");
-                        }
-                    }
+                if key_pressed == String::from("d") {
+                    ripper::display(&contents);
                 }
             }
+            /*
+            Just testing the get_lines function here.
+            let file_lines: u16 = ripper::get_lines(&contents);
+            println!("Lines: {file_lines}");
+            */
         }
-        /*
-        Just testing the get_lines function here.
-        let file_lines: u16 = ripper::get_lines(&contents);
-        println!("Lines: {file_lines}");
-        */
     }
 }
