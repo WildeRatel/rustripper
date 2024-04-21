@@ -46,16 +46,10 @@ pub fn get_user_input() -> Result<String, Error> {
         if poll(Duration::from_millis(100))? {
             if let Event::Key(key_event) = read()? {
                 match key_event.code {
-                    KeyCode::Char('q') => { 
-                        return Ok(String::from("q"));
-                    },
-                    KeyCode::Char('i') => {
-                        return Ok(String::from("i"));
-                    },
-                    KeyCode::Char('s') => {
-                        return Ok(String::from("s"));
-                    },
-                    _ => println!("Other key pressed!")
+                    KeyCode::Char('q') => return Ok(String::from("q")),
+                    KeyCode::Char('i') => return Ok(String::from("i")),
+                    KeyCode::Char('s') => return Ok(String::from("s")),
+                    _ => continue
                 }
             }
         }
