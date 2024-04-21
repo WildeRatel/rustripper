@@ -1,5 +1,7 @@
 use std::io::Error;
 use std::fs;
+use crossterm::event::{poll, read, Event, KeyCode};
+use std::time::Duration;
 
 //Opens a file into a String when possible, otherwise it returns an error.
 pub fn open_file(file_path: &String) -> Result<String, Error> {
@@ -36,4 +38,19 @@ pub fn get_lines(contents: &String) -> u16 {
         line_count += 1;
     });
     line_count
+}
+
+//Function to get user input. Uses crossterm.
+pub fn get_user_input() -> Result<String, Error> {
+    loop {
+        if poll(Duration::from_millis(100))? {
+            if let Event::Key(key_event) = read()? {
+                match key_event.code {
+                    KeyCode::Char('q') => { let key_pressed = String::from("q");
+                                            return Ok(key_pressed);},
+                    _ => println!("Other key pressed!")
+                }
+            }
+        }
+    } 
 }
