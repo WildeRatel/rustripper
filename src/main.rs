@@ -50,15 +50,16 @@ fn main() {
                         if page != String::from("Nah") {
                             println!("{page}");
                         } else {
-                            eprint!("Nah");
+                            eprintln!("Nah");
                         }
                     }
                 }
             }
         }
-
-        //Just testing the get_lines function here.
+        /*
+        Just testing the get_lines function here.
         let file_lines: u16 = ripper::get_lines(&contents);
         println!("Lines: {file_lines}");
+        */
     }
 }
