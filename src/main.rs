@@ -14,10 +14,7 @@ fn main() {
     // Most of the code will be going in here.
     else {
         loop {
-            let _ = std::process::Command::new("cmd")
-                .args(&["/C", "cls"])
-                .status()
-                .expect("Failed to clear screen!");
+            ripper::term_clear();
             println!("Controls: (q)uit | (i)nfo | (s)earch | (d)isplay lines");
             let contents: String = ripper::open_file(&user).unwrap();
 
@@ -29,6 +26,9 @@ fn main() {
 
                 if key_pressed == String::from("d") {
                     ripper::display(&contents);
+                }
+                if key_pressed == String::from("q") {
+                    break;
                 }
             }
             /*

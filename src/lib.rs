@@ -105,3 +105,11 @@ pub fn display(contents: &String) {
         }
     }
 }
+
+//Term clear command.
+pub fn term_clear() {
+    let _ = std::process::Command::new("cmd")
+        .args(&["/C", "cls"])
+        .status()
+        .expect("Failed to clear screen!");
+}
