@@ -21,7 +21,10 @@ fn main() {
             eprintln!("Error: {key_error}");
         } else {
             let key_pressed = ripper::get_user_input().unwrap();
+
             if key_pressed == String::from("d") {
+                println!("d");
+
                 let mut line_from: String = String::new();
                 let mut line_to: String = String::new();
                 io::stdin()
@@ -31,16 +34,16 @@ fn main() {
                     .read_line(&mut line_to)
                     .expect("Failed to read line!");
 
-                if let Err(parse_e) = line_from.parse::<u8>() {
+                if let Err(parse_e) = line_from.trim().parse::<u8>() {
                     println!("Failed to parse input: {parse_e}");
                 } else {
-                    if let Err(parse_e) = line_to.parse::<u8>() {
+                    if let Err(parse_e) = line_to.trim().parse::<u8>() {
                         println!("Failed to parse input: {parse_e}");
                     } else {
                         let page: String = ripper::display_contents(
                             &contents,
-                            line_from.parse::<u8>().unwrap(),
-                            line_to.parse::<u8>().unwrap()
+                            line_from.trim().parse::<u8>().unwrap(),
+                            line_to.trim().parse::<u8>().unwrap(),
                         );
 
                         //I'm still using Nah as an error code, should probably go and fix that later. Maybe, maybe not, i dunno.
