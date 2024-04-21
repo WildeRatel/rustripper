@@ -28,6 +28,7 @@ fn main() {
                     ripper::display(&contents);
                 }
                 if key_pressed == String::from("q") {
+                    println!("Quit!");
                     break;
                 }
             }
