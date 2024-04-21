@@ -25,3 +25,12 @@ pub fn display_contents(contents: &String, scroll_lines_from: u8, scroll_lines_t
         String::from("Nah")
     }
 }
+
+pub fn get_lines(contents: &String) -> u16 {
+    let mut line_count: u16 = 0;
+
+    contents.split('\n').for_each(|_i| {
+        line_count += 1;
+    });
+    line_count
+}
