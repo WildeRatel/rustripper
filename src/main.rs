@@ -24,19 +24,20 @@ fn main() {
             } else {
                 let key_pressed = ripper::get_user_input().unwrap();
 
-                if key_pressed == String::from("d") {
-                    ripper::display(&contents);
-                }
-                if key_pressed == String::from("q") {
-                    println!("Quit!");
-                    break;
-                }
-                if key_pressed == String::from("i") {
-                    if let Err(e) = ripper::get_info(&user, &contents) {
-                        eprintln!("Error: {e}")
-                    } else {
-                        ripper::get_info(&user, &contents).unwrap();
+                match key_pressed {
+                    ripper::UserInputs::D => ripper::display(&contents),
+                    ripper::UserInputs::Q => {
+                        println!("Quit!");
+                        break;
                     }
+                    ripper::UserInputs::I => {
+                        if let Err(e) = ripper::get_info(&user, &contents) {
+                            eprintln!("Error: {e}")
+                        } else {
+                            ripper::get_info(&user, &contents).unwrap();
+                        }
+                    }
+                    _ => continue,
                 }
             }
         }

@@ -4,6 +4,14 @@ use std::io;
 use std::io::Error;
 use std::time::Duration;
 
+//Enum for user inputs
+pub enum UserInputs {
+    Q,
+    I,
+    S,
+    D,
+}
+
 //Opens a file into a String when possible, otherwise it returns an error.
 pub fn open_file(file_path: &String) -> Result<String, Error> {
     let contents = fs::read_to_string(file_path)?;
@@ -44,15 +52,15 @@ pub fn get_lines(contents: &String) -> u16 {
 }
 
 //Function to get user input. Uses crossterm.
-pub fn get_user_input() -> Result<String, Error> {
+pub fn get_user_input() -> Result<UserInputs, Error> {
     loop {
         if poll(Duration::from_millis(100))? {
             if let Event::Key(key_event) = read()? {
                 match key_event.code {
-                    KeyCode::Char('q') => return Ok(String::from("q")),
-                    KeyCode::Char('i') => return Ok(String::from("i")),
-                    KeyCode::Char('s') => return Ok(String::from("s")),
-                    KeyCode::Char('d') => return Ok(String::from("d")),
+                    KeyCode::Char('q') => return Ok(UserInputs::Q),
+                    KeyCode::Char('i') => return Ok(UserInputs::I),
+                    KeyCode::Char('s') => return Ok(UserInputs::S),
+                    KeyCode::Char('d') => return Ok(UserInputs::D),
                     _ => continue,
                 }
             }
