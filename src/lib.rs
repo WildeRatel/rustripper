@@ -113,3 +113,21 @@ pub fn term_clear() {
         .status()
         .expect("Failed to clear screen!");
 }
+
+//File info function
+pub fn get_info(file: &String, contents: &String) -> std::io::Result<()> {
+    let metadata = fs::metadata(file)?;
+    println!("File type:\t\t\t {:?}", metadata.file_type());
+    println!("Directory:\t\t\t {:?}", metadata.is_dir());
+    println!("File:\t\t\t {:?}", metadata.is_file());
+    println!("Symbolic link:\t\t\t {:?}", metadata.is_symlink());
+    println!("Bytes:\t\t\t {:?}", metadata.len());
+    println!("Readonly:\t\t\t {:?}", metadata.permissions().readonly());
+    println!("Modified:\t\t\t {:?}", metadata.modified());
+    println!("Accessed:\t\t\t {:?}", metadata.accessed());
+    println!("Created:\t\t\t {:?}", metadata.created());
+    println!("Lines: {}", get_lines(contents));
+
+    dummy_wait();
+    Ok(())
+}

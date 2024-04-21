@@ -31,12 +31,14 @@ fn main() {
                     println!("Quit!");
                     break;
                 }
+                if key_pressed == String::from("i") {
+                    if let Err(e) = ripper::get_info(&user, &contents) {
+                        eprintln!("Error: {e}")
+                    } else {
+                        ripper::get_info(&user, &contents).unwrap();
+                    }
+                }
             }
-            /*
-            Just testing the get_lines function here.
-            let file_lines: u16 = ripper::get_lines(&contents);
-            println!("Lines: {file_lines}");
-            */
         }
     }
 }
