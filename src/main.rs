@@ -15,7 +15,7 @@ fn main() {
         let contents: String = ripper::open_file(&user).unwrap();
         let page: String = ripper::display_contents(&contents, 1, 4);
 
-        //I'm still using Nah as an error code, should probably go and fix that later.
+        //I'm still using Nah as an error code, should probably go and fix that later. Maybe, maybe not, i dunno.
         if page != String::from("Nah") {
             println!("{page}");
         }
