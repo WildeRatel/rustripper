@@ -8,21 +8,20 @@ pub fn open_file(file_path: &String) -> Result<String, Error> {
 }
 
 pub fn display_contents(contents: &String, scroll_lines_from: u8, scroll_lines_to: u8) -> String {
-    let content_split = contents.split('\n');
-    let lines_to_scroll: u8 = (scroll_lines_to) - (scroll_lines_from);
-
-    let content_vec = content_split.collect::<Vec<&str>>();
-
-    if content_vec.len() >= lines_to_scroll as usize {
-        let mut content: String = String::new();
-        for i in (scroll_lines_from - 1) as usize..=(scroll_lines_to - 1) as usize {
-            let use_line = content_vec[i].to_string();
-            content.push_str(&use_line);
-            println!("{content}");
-        }
-        content.to_string()
+    let mut content_vec: Vec<String> = Vec::new();
+    for i in contents.split("\n") {
+        content_vec.push(i.into());
     }
-    else {
+    if (content_vec.len() > (scroll_lines_to - scroll_lines_from) as usize) && (content_vec.len() >= scroll_lines_to as usize) {
+        let mut page: String = String::new();
+
+        for i in (scroll_lines_from - 1)..scroll_lines_to {
+            page.push_str(&content_vec[i as usize]);
+            page.push('\n');
+        }
+
+        page
+    } else {
         String::from("Nah")
     }
 }
