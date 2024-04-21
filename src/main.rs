@@ -1,3 +1,8 @@
+/*
+Todo:
+Make info display properly
+*/
+
 use std::io;
 
 fn main() {
@@ -13,10 +18,11 @@ fn main() {
     }
     // Most of the code will be going in here.
     else {
+        let contents: String = ripper::open_file(&user).unwrap();
+
         loop {
             ripper::term_clear();
             println!("Controls: (q)uit | (i)nfo | (s)earch | (d)isplay lines");
-            let contents: String = ripper::open_file(&user).unwrap();
 
             //User input
             if let Err(key_error) = ripper::get_user_input() {
@@ -35,6 +41,8 @@ fn main() {
                             eprintln!("Error: {e}")
                         } else {
                             ripper::get_info(&user, &contents).unwrap();
+                            ripper::dummy_wait();
+                            ripper::term_clear(); //Dunno why i have to clear the terminal twice, but it works so whatever.
                         }
                     }
                     _ => continue,

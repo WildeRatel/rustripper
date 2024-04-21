@@ -97,6 +97,7 @@ pub fn display(contents: &String) {
             println!("Failed to parse input: {parse_e}");
             dummy_wait();
         } else {
+            term_clear();
             let page: String = display_contents(
                 &contents,
                 line_from.trim().parse::<u8>().unwrap(),
@@ -136,6 +137,5 @@ pub fn get_info(file: &String, contents: &String) -> std::io::Result<()> {
     println!("Created:\t\t\t {:?}", metadata.created());
     println!("Lines: {}", get_lines(contents));
 
-    dummy_wait();
     Ok(())
 }
