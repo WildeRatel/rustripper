@@ -1,7 +1,5 @@
 use std::io;
 
-use ripper::get_lines;
-
 fn main() {
     let mut user = String::new();
     io::stdin().read_line(&mut user).expect("Failed to read user input!");
@@ -21,7 +19,7 @@ fn main() {
             eprint!("Nah");
         }
 
-        let file_lines: u16 = get_lines(&contents);
+        let file_lines: u16 = ripper::get_lines(&contents);
         println!("Lines: {file_lines}");
     }
 }
