@@ -8,7 +8,7 @@ pub fn open_file(file_path: &String) -> Result<String, Error> {
     Ok(contents)
 }
 
-//Displays lines in a file from a point to a point. Will error with nah if the lines are out of index.
+//Displays lines in a file from a point to a point. Will error with Nah if the lines are out of index.
 pub fn display_contents(contents: &String, scroll_lines_from: u8, scroll_lines_to: u8) -> String {
     let mut content_vec: Vec<String> = Vec::new();
     for i in contents.split("\n") {
