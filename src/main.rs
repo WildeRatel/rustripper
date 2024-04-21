@@ -18,6 +18,7 @@ fn main() {
         //I'm still using Nah as an error code, should probably go and fix that later. Maybe, maybe not, i dunno.
         if page != String::from("Nah") {
             println!("{page}");
+            println!("Controls: (q)uit | (i)nfo | (s)earch");
         }
         else {
             eprint!("Nah");
@@ -26,5 +27,15 @@ fn main() {
         //Just testing the get_lines function here.
         let file_lines: u16 = ripper::get_lines(&contents);
         println!("Lines: {file_lines}");
+
+        //Testing user input
+        if let Err(key_error) = ripper::get_user_input() {
+            eprintln!("Error: {key_error}");
+        }
+        else {
+            let key_pressed = ripper::get_user_input().unwrap();
+            println!("{key_pressed}");
+        }
+        
     }
 }
