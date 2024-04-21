@@ -18,6 +18,7 @@ fn main() {
         //I'm still using Nah as an error code, should probably go and fix that later. Maybe, maybe not, i dunno.
         if page != String::from("Nah") {
             println!("{page}");
+            println!("Controls: (q)uit | (i)nfo | (s)earch");
         }
         else {
             eprint!("Nah");
