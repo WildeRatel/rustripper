@@ -45,6 +45,9 @@ fn main() {
                             ripper::term_clear(); //Dunno why i have to clear the terminal twice, but it works so whatever.
                         }
                     }
+                    ripper::UserInputs::S => {
+                        let test_vec: Vec<String> = ripper::get_search(&contents);
+                    },
                     _ => continue,
                 }
             }
