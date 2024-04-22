@@ -139,3 +139,9 @@ pub fn get_info(file: &String, contents: &String) -> std::io::Result<()> {
 
     Ok(())
 }
+
+//Function to search file for specific keyword.
+pub fn get_search(contents: &String) -> Vec<String> {
+    let dummy_vec: Vec<String> = Vec::new();
+    dummy_vec;
+}
