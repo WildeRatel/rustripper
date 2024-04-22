@@ -47,8 +47,7 @@ fn main() {
                     }
                     ripper::UserInputs::S => {
                         let test_vec: Vec<String> = ripper::get_search(&contents);
-                    },
-                    _ => continue,
+                    }
                 }
             }
         }
