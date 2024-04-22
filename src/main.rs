@@ -1,6 +1,6 @@
 /*
 Todo:
-Make info display properly
+Write a working search function.
 */
 
 use std::io;
